@@ -1,0 +1,92 @@
+<div class="container-fluid g-0">
+    <nav class="navbar navbar-expand-lg bg-info px-2">
+        <div class="container-fluid">
+            <!-- <div class="side-nav-button p-2 me-3 text-dark">
+                <i class="fa-solid fa-bars"></i>
+            </div>  -->
+            <a class="navbar-brand px-4" href="#">ECOM Dashboard</a>
+            <div class="navbar-collapse"></div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="d-flex">
+
+                <button routerLink="/cart" class="btn btn-info">
+                        <i style="font-size: 20px;" class="fa-solid fa-cart-plus"></i>
+                        <div style="font-size:10px;" class="badge bg-danger">{{totalItem}} </div>
+                    
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/login">Logout</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <app-usersidenav> </app-usersidenav>
+    <main>
+
+        <div class="display-area p-3">
+            <p class="fs-1 fw-bold">Products</p>
+            <div class="container">
+                <div class="row row-cols-1 row-cols-md-1 g-4"> 
+                <!-- <div class="row row-cols-1 row-cols-md-3 g-4"> -->
+                    <ng-container *ngFor="let item of productData">
+                        <div class="col">
+                            <div class="card h-100 carder">
+                                <a [routerLink]="['/product-detail',item.id]">
+                                    <img [src]="item.imagebox" width="100px" height="200px" class="card-img-top"
+                                        alt="product image" /></a>
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title"
+                                            style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;max-width:100ch ">
+                                            {{item.pdtname}}</h5>
+                                        <p class="card-text">
+                                            <strong> ₹{{item.pdtprice}}</strong>
+                                        </p>
+                                        <button class="btn btn-primary" *ngIf="totalItem==0" (click)=addtocart(item)> Add to cart</button>
+                                       <button class="btn btn-success" *ngIf="totalItem==1" routerLink="/cart"> Checkout</button>                                   
+                                    </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+    <!-- <table class="table mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Product ID</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Product Price</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Subcategory Name</th>
+                <th scope="col">brand Name</th>
+                <th scope="col">Product Image Name</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of productData">
+                <td>{{row.id}}</td>
+                <td>{{row.pdtname}}</td>
+                <td>{{row.pdtprice}}</td>
+                <td>{{row.category_name}}</td>
+                <td>{{row.subcategory_name}}</td>
+                <td>{{row.brand_name}}</td>
+                <td>{{row.imageUrl}}</td>
+            </tr>
+        </tbody>
+    </table> -->

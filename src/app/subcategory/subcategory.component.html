@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg bg-info px-2">
+  <div class="container-fluid">
+    <a class="navbar-brand px-4" routerLink="#">ECOM Subcategory</a>
+    <div class="d-flex">
+      <button (click)="clickAddsubCategory()" class="btn btn-success" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">Add Subcategory</button>
+    </div>
+  </div>
+</nav>
+
+<app-sidenav></app-sidenav>
+
+<div class="display-area p-3 mx-5">
+
+  <table class="table mt-3">
+    <thead>
+      <tr>
+        <th scope="col">Subcategory ID</th>
+        <th scope="col">SubCategory Name</th>
+        <th scope="col">Category Name</th>
+        <th scope="col">Subcat. image Name</th>
+
+        <!-- <th scope="col">Category Image</th> -->
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of subcategoryData">
+        <!-- <td>{{subcategoryData |json}}}</td> -->
+        <td>{{row.id}}</td>
+        <td>{{row.name}}</td>
+        <td>{{row.category_name}}</td>
+        <td>{{row.imageUrl}}</td>
+        <!-- <td><img [src]="url" width="50" height="50"></td> -->
+        <td>
+          <button type="button" (click)="onsubEdit(row)" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            class="btn btn-info">Edit</button>
+          <button type="button" (click)="deletesubCategory(row)" class="btn btn-danger mx-3">Delete</button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Subcategory Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="subcategoryForm">
+          <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Subcategory Name</label>
+            <input type="text" formControlName="name" class="form-control" id="exampleInputName">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputCategory" class="form-label">Select Category</label>
+            <select formControlName="catname" class="form-select" aria-label="Default select example">
+              <option *ngFor="let crow of categoryData" [value]="crow.id">{{crow.name}}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputUpload" class="form-label">Upload Image</label>
+            <input type="file" (change)="onUpload($event)" formControlName="imageUrl" class="form-control"
+              id="exampleInputUpload">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" *ngIf="showAdd" (click)="postsubCategoryDetails()" class="btn btn-primary">Add</button>
+        <button type="button" *ngIf="showUpdate" (click)="updatesubCategoryDetails()"
+          class="btn btn-primary">Update</button>
+
+      </div>
+    </div>
+  </div>
+</div>

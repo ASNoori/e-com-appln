@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg bg-info px-2">
+  <div class="container-fluid">
+    <a class="navbar-brand px-4" routerLink="#">ECOM Brand</a>
+    <div class="d-flex">
+      <button (click)="clickAddBrand()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Brand</button>
+    </div>
+  </div>
+</nav>
+ <app-sidenav></app-sidenav>
+ <div class="display-area p-3 mx-5">
+
+  <table class="table mt-3">
+      <thead>
+      <tr>
+        <th scope="col">Brand ID</th>
+        <th scope="col">Brand Name</th>
+        <th scope="col">Brand Image Name</th>
+        <th scope="col">Action</th>
+  
+      </tr>
+    </thead>
+      <tbody>
+      <tr *ngFor="let row of brandData">
+        <td>{{row.id}}</td>
+        <td>{{row.name}}</td>
+        <td>{{row.imageUrl}}</td>
+        <td>
+          <button type="button" (click)="onbrandEdit(row)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
+          <button type="button" (click)="deleteBrand(row)" class="btn btn-danger mx-3">Delete</button>
+        </td>
+    
+      </tr>
+    </tbody>
+    </table>
+    </div>  
+    <!-- Modal -->
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Brand Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="brandForm">
+            <div class="mb-3">
+              <label for="exampleInputName" class="form-label">Brand Name</label>
+              <input type="text"  formControlName="name" class="form-control" id="exampleInputName">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputUpload" class="form-label">Upload Image</label>
+              <input type="file" (change)="onBrandUpload($event)" formControlName="imageUrl" class="form-control" id="exampleInputUpload">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" *ngIf="showAdd" (click)="postBrandDetails()" class="btn btn-primary">Add</button>
+          <button type="button" *ngIf="showUpdate" (click)="updateBrandDetails()" class="btn btn-primary">Update</button> 
+  
+        </div>
+      </div>
+    </div>
+    </div>

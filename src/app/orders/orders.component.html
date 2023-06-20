@@ -1,0 +1,61 @@
+<div class="container-fluid g-0">
+    <div class="container-fluid g-0">
+        <nav class="navbar navbar-expand-lg bg-info px-2">
+            <div class="container-fluid">
+                <a class="navbar-brand px-4" href="#">My Orders</a>
+                <div class="navbar-collapse"></div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="d-flex">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    
+                            <li class="nav-item">
+                                <a class="nav-link" routerLink="/login">Logout</a>
+                            </li>
+    
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <app-usersidenav> </app-usersidenav>
+    <main>
+    <div class="display-area p-3">
+        <div class="container">
+            <div class="card-table">
+                <div class="cart-product">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>S.no</th>
+                                <th>Product Name</th>
+                                <th>Product Image</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of orders ; let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.pdtname}}</td>
+                                <td><img style="width:120px;" src="{{item.imagebox}}"></td>
+                                <td>{{item.pdtdesc}}</td>
+                                <td>{{item.pdtprice}}</td>
+                                <td>{{item.quantity}}</td>
+                                <td>{{item.total}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+    </div>
